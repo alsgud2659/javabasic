@@ -38,7 +38,7 @@ public class Exam7 {
 //			System.out.println();
 //		}
 		
-		int[] scores = {70, 60, 55, 75, 95, 80, 80, 85, 100};
+		int[] scores = {70, 60, 55, 75, 95, 90,80, 80, 85, 100};
 		int sum = 0;
 		int avg = 0;
 		int max = 0;
