@@ -94,7 +94,7 @@ public class Exam5 {
 		System.out.println(Arrays.toString(array3));
 		
 		
-		// 배열의 특징
+	
 	}
 
 }
