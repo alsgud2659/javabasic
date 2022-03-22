@@ -24,4 +24,3 @@ public class Exam7 {
 	}
 
 }
-© 2022 GitHub, Inc.
