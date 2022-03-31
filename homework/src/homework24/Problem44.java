@@ -5,6 +5,9 @@ public class Problem44 {
 	static int m = 5;															// 열의 개수
 	static int[][] map = {{0,0,1,1,0},{0,0,0,1,1},{1,1,1,1,1},{0,0,0,0,0}};		// 아이스크림틀
 	public static void main(String[] args) {
+		// DFS(Depth First Search) 깊이 우선 탐색
+		// 루트 노드(혹은 다른 임의의 노드)에서 시작해서 다음 분기(branch)로 넘어가기 전에 해당 분기를 완벽하게 탐색하는 방법
+		
 		int count = 0;						// 만들어지는 아이스크림의 개수
 		for (int i = 0; i < n; i++) {		// map의 행을 순회
 			for (int j = 0; j < m; j++) {	// map의 열을 순회
@@ -22,7 +25,7 @@ public class Problem44 {
 			return false;
 		}
 		if (map[x][y] == 0) {		// map[x][y]이 0이라면 
-			map[x][y] = 1;			// 그 부분을 1로 변경
+			map[x][y] = 1;			// 그 부분을 1로 변경 (이 부분이 반드시 있어야 함 안하면 무한루프)
 			dfs(x - 1, y);			// map[x][y]을 기준으로 좌를 dfs메서드를 재귀적으로 호출
 			dfs(x + 1, y);			// map[x][y]을 기준으로 우를 dfs메서드를 재귀적으로 호출
 			dfs(x, y + 1);			// map[x][y]을 기준으로 상을 dfs메서드를 재귀적으로 호출
