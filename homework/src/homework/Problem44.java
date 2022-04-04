@@ -1,4 +1,4 @@
-package homework24;
+package homework;
 
 public class Problem44 {
 	static int n = 4;	// 행의 개수
