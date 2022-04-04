@@ -43,7 +43,34 @@ public class homework25 {
 		// clone()메서드 사용
 		
 		// #45
+		int result = 0;
+		String version1 = "1.0.1";
+		String version2 = "1.0.0.1";
 		
+		String[] ver1 = version1.split("//.");
+		String[] ver2 = version2.split("//.");
+		
+		int max = Math.max(ver1.length, ver2.length);
+		
+		for (int i = 0; i < max; i++) {
+			int temp1 = 0;
+			int temp2 = 0;
+			if(i < ver1.length) {
+				temp1 = Integer.parseInt(ver1[i]);
+			}
+			if(i < ver2.length) {
+				temp2 = Integer.parseInt(ver2[i]);
+			}
+			
+			if(temp1 > temp2) {
+				result = 1;
+			}else if(temp1 < temp2) {
+				result = -1;
+			}
+			
+		}
+		
+		System.out.println(result);
 		
 	}
 
