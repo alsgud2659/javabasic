@@ -1,29 +1,23 @@
 package homework;
-
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class Homework26 {
 
 	public static void main(String[] args) {
-		// #45
-
-	}
-	public static int bfs(int n, int m, int[][] maps) {
-		Queue<Node> q = new LinkedList<>();
-		q.add(new Node(1,1));
-		int[] xArr = {-1,0,1,0};
-		int[] yArr = {0,1,0,-1};
-		isVisit[1][1] = 1;
-		return -1;
-	}
+		Scanner sc = new Scanner(System.in);
+	    System.out.print("입력할 정수의 개수:");
+	    int num = sc.nextInt();
+	    Integer[] arr = new Integer[num];
+	    for(int i = 0; i < num; i++){
+	      System.out.print("정수:");
+	      int a = sc.nextInt();
+	      arr[i] = a;
+	    }
+	    
+	    Arrays.sort(arr, Collections.reverseOrder());
+	    System.out.println(Arrays.toString(arr));    
+	}	
 }
 
-class Node{
-	int row;
-	int col;
-	public Node(int row, int col) {
-		this.row = row;
-		this.col = col;
-	}
-}
