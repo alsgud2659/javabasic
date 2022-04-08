@@ -7,6 +7,7 @@
 <title>게시판</title>
 </head>
 <body>
+
 <form method="post" action="board_insert_db.jsp">
 <table>
 <caption>게시판 입력</caption>
@@ -17,9 +18,7 @@
 <th>*&nbsp; 이름  &nbsp;</th>
 <td><input type="text" name="board_name" required></td>
 </tr>
-
-<tr>
-<th>&nbsp; 제목  &nbsp;</th>
+<th>&nbsp; 제목 &nbsp;</th>
 <td><input type="text" name="board_title"></td>
 </tr>
 
@@ -34,8 +33,6 @@
 <input type=submit value="게시물 등록"></td></tr>
 
 </table>
-
-
 </form>
 </body>
 </html>
