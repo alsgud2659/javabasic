@@ -5,6 +5,10 @@ import java.util.Scanner;
 public class Homework29 {
 
 	public static void main(String[] args) {
+		// 아이디어
+		// 어글리 넘버에 2, 3, 5를 곱해도 어글리넘버이기 때문에
+		// 어글리 넘버에 2, 3, 5를 곱한 값중 가장 작은 값이 다음 인덱스의 어글리넘버가 됨
+		
 		Scanner sc = new Scanner(System.in);
 		System.out.print("몇번째 UglyNumber?:");
 		int n = sc.nextInt();
