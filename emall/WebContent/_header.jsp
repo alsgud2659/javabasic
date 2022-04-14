@@ -1,5 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<style>
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+body {
+	font-family:'GmarketSansMedium';
+	padding-bottom: 70px;
+}
+</style>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Ninth navbar example">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">이몰</a>
@@ -41,6 +53,7 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" href="#">공지사항</a></li>
             <li><a class="dropdown-item" href="#">질문답변</a></li>
+            <li><a class="dropdown-item" href="#">자유게시판</a></li>
           </ul>
         </li>
       </ul>

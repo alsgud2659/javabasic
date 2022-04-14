@@ -12,7 +12,7 @@
           <a class="nav-link active" aria-current="page" href="#">주문목록</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">게시판</a>
+          <a class="nav-link active" aria-current="page" href="/boardlist.jsp">게시판</a>
         </li>
       </ul>
     </div>
