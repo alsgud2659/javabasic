@@ -62,6 +62,11 @@
 			</table>
 		</div>
 		<hr>
+		<div class="form-group row" align="right">
+			<div class="col-sm-6">
+				<a href="boardwrite.jsp" class="btn btn-secondary" role="button">글쓰기</a>
+			</div>	
+			</div>	
 	</div>
 
 
