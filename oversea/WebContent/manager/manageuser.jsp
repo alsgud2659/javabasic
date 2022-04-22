@@ -1,15 +1,17 @@
 <%@page import="java.sql.*"%>
+<%@page import="jdbc.*"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>유저관리</title>
 </head>
 <body>
-<%!// 선언문
-	String title = "게시판 관리";%>
+	<%!// 선언문
+	String title = "유저 관리";%>
 	<!-- CSS only -->
 	<link
 		href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -17,15 +19,17 @@
 		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 		crossorigin="anonymous">
 
-	<%@ include file="/_header2.jsp"%>
-	
+	<%@ include file="/_header.jsp"%>
+
 	<div class="alert alert-secondary" role="alert">
 		<div class="container">
 			<h1 class="display-3">
 				<%=title%></h1>
 		</div>
 	</div>
-	<h3 align="center">신고가 들어온 댓글</h3>
+
+
+	<h3 align="center">유저 리스트</h3>
 	<div class="container">
 		<div class="row" align="center">
 			<div class="container my-3" align="center">
@@ -33,10 +37,13 @@
 					<thead>
 						<tr class="table-dark">
 							<th>번호</th>
-							<th>작성자</th>
-							<th>내용</th>
-							<th>작성날짜</th>
-							<th>삭제하기</th>
+							<th>아이디</th>
+							<th>이름</th>
+							<th>성별</th>
+							<th>전화번호</th>
+							<th>가입 날짜</th>
+							<th>유저 삭제</th>
+							<th>정보 수정</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -45,7 +52,7 @@
 							//JDBC 드라이버 로딩 테스트
 						Class.forName("com.mysql.jdbc.Driver");
 						//DB 연결
-						String url = "jdbc:mysql://localhost:3306/emall";
+						String url = "jdbc:mysql://localhost:3306/ifu";
 						String id = "root";
 						String pw = "0000";
 
@@ -56,7 +63,7 @@
 						conn = DriverManager.getConnection(url, id, pw);
 
 						// 테이블 데이터 넣는 SQL
-						String sql = "SELECT count(*) FROM reportcomment";
+						String sql = "SELECT count(*) FROM user";
 						pstmt = conn.prepareStatement(sql);
 						rset = pstmt.executeQuery();
 
@@ -102,7 +109,7 @@
 						//*****************************************************************
 						//SQL 처리
 
-						sql = "SELECT * FROM reportcomment ORDER BY rcname ASC LIMIT ?,?";
+						sql = "SELECT * FROM user ORDER BY uid ASC LIMIT ?,?";
 						pstmt = conn.prepareStatement(sql);
 						pstmt.setInt(1, start_pointer);
 						pstmt.setInt(2, LINE_PER_PAGE);
@@ -113,20 +120,33 @@
 
 						int no = 1;
 						while (rset.next()) {
-							String rcname = rset.getString("rcname");
-							String rccontent = rset.getString("rccontent");
-							String rcdate = rset.getString("rcdate");
+
+							String uid = rset.getString("uid");
+							String uname = rset.getString("uname");
+							String ugender = rset.getString("ugender");
+							String ubirth = rset.getString("ubirth");
+							String uphone = rset.getString("uphone");
+							String uregiday = rset.getString("uregiday");
+							String uaddr = rset.getString("uaddr");
+							String upw = rset.getString("upw");
+							String uemail = rset.getString("uemail");
 						%>
 
 						<tr>
 							<td><%=no%></td>
-							<td><%=rcname%></td>
-							<td><%=rccontent%></td>
-							<td><%=rcdate%></td>
-							<td><a href="#" type="button" class="btn btn-danger">삭제</a></td>
+							<td><%=uid%></td>
+							<td><%=uname%></td>
+							<td><%=ugender%></td>
+							<td><%=uphone%></td>
+							<td><%=uregiday%></td>
+							<td><a href="userdeletedb.jsp?uid=<%=uid %>" type="button" class="btn btn-danger">유저삭제</a></td>
+							<td><a href="userupdate.jsp?uid=<%=uid %>&uname=<%=uname %>
+														&ugender=<%=ugender %>&uphone=<%=uphone %>
+														&ubirth=<%=ubirth %>&uaddr=<%=uaddr %>
+														&upw=<%=upw %>&uemail=<%=uemail %>" type="button" class="btn btn-primary">정보수정</a></td>
 						</tr>
 						<tr>
-							<td colspan=6 align="center">
+							<td colspan=8 align="center">
 							
 								<%
 								no++;
@@ -176,15 +196,15 @@
 					</tbody>
 				</table>
 
-				<a href="manageuser.jsp">유저리스트</a>
-				<a href="manageboard.jsp">게시판 관리</a>
+				<a href="manageboard.jsp">게시글 관리</a>
+				<a href="manageboard.jsp">댓글 관리</a>
 
 			</div>
 		</div>
 		<hr>
 	</div>
-	
-	<%@ include file="/_footer2.jsp"%>
+
+	<%@ include file="/_footer.jsp"%>
 	<!-- JavaScript Bundle with Popper -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

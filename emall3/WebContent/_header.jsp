@@ -40,7 +40,7 @@ body {
             관리
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="#">회원관리</a></li>
+            <li><a class="dropdown-item" href="/emall3/manager/managemain.jsp">회원관리</a></li>
             <li><a class="dropdown-item" href="#">제품관리</a></li>
             <li><a class="dropdown-item" href="#">판매관리</a></li>
             <li><a class="dropdown-item" href="#">게시판관리</a></li>

@@ -49,7 +49,7 @@
           </ul>
         </li>
         <li><a href="#" class="nav-link px-2 link-dark">회원</a></li>
-        <li><a href="#" class="nav-link px-2 link-dark">관리자</a></li>
+        <li><a href="/manager/managemain.jsp" class="nav-link px-2 link-dark">관리자</a></li>
       </ul>
 
       <div class="col-md-3 text-end">

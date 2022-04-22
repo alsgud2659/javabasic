@@ -1,9 +1,81 @@
 package jdbc;
 
+import java.sql.*;
+import java.util.ArrayList;
+
+import javax.naming.NamingException;
+
+import util.ConnectionPool;
+
 public class OrderDAO {
-	public int getlist(String who, String status) {
+	public ArrayList<OrderDTO> getList() throws NamingException, SQLException{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		
-		return 1;
+		try {
+			String sql = "SELECT * FROM orders";
+			
+			conn = ConnectionPool.get();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			ArrayList<OrderDTO> orders = new ArrayList<OrderDTO>();
+			
+			while(rs.next()) {
+				orders.add(new OrderDTO(rs.getString("oid"),
+										rs.getString("opid"),
+										rs.getString("ouid"),
+										rs.getString("opname"),
+										rs.getString("oprice"),
+										rs.getString("ostatus"),
+										rs.getString("odate"),
+										rs.getString("ograde"),
+										rs.getString("ocomm")));
+			}
+			return orders;
+			
+		}finally{
+			if(rs != null) rs.close();
+			if(pstmt != null) pstmt.close();
+			if(conn != null) conn.close();
+		}
+		
+	}
+	
+	public ArrayList<OrderDTO> getList(String status) throws NamingException, SQLException{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT * FROM orders WHERE ostatus=?";
+			conn = ConnectionPool.get();
+			pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, status);
+			rs = pstmt.executeQuery();
+			
+			ArrayList<OrderDTO> orders = new ArrayList<OrderDTO>();
+			
+			while(rs.next()) {
+				orders.add(new OrderDTO(rs.getString("oid"),
+										rs.getString("opid"),
+										rs.getString("ouid"),
+										rs.getString("opname"),
+										rs.getString("oprice"),
+										rs.getString("ostatus"),
+										rs.getString("odate"),
+										rs.getString("ograde"),
+										rs.getString("ocomm")));
+			}
+			return orders;
+			
+		}finally{
+			if(rs != null) rs.close();
+			if(pstmt != null) pstmt.close();
+			if(conn != null) conn.close();
+		}
+		
 	}
 	
 	// 구매 시작 메서드 status 1 고객

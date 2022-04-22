@@ -1,19 +1,17 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="jdbc.*"%>
-<%@page import="java.util.*"%>
+<%@page import="jdbc.OrderDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>주문 관리</title>
+<title>Insert title here</title>
 </head>
 <body>
-
-
-
-	<%!// 선언문
-	String title = "게시판 목록";%>
+<%!// 선언문
+	String title = "주문 관리";%>
 	<!-- CSS only -->
 	<link
 		href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -29,13 +27,16 @@
 			</h1>
 		</div>
 	</div>
-
 	<div class="container">
 		<div class="row" align="center">
 
-
-
 			<div class="container my-3">
+			<div align="right">
+				<a href="orderstatus.jsp?status=1">[입금전]</a>  
+				<a href="orderstatus.jsp?status=2">[입금완료]</a>  
+				<a href="orderstatus.jsp?status=3">[배송중]</a>  
+				<a href="orderstatus.jsp?status=4">[배송완료]</a>  	
+			</div>
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr class="table-dark">
@@ -53,7 +54,8 @@
 					<tbody>
 
 						<%
-							ArrayList<OrderDTO> orders = (new OrderDAO()).getList("1","2");
+							String status = request.getParameter("status");
+							ArrayList<OrderDTO> orders = (new OrderDAO()).getList(status);
 
 						for (OrderDTO order : orders) {
 						%>
@@ -86,8 +88,9 @@
 		</div>
 		<hr>
 	</div>
+	
+	
 	<%@ include file="/_footer.jsp"%>
-
 
 	<!-- JavaScript Bundle with Popper -->
 	<script

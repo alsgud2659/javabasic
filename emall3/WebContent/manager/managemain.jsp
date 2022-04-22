@@ -16,7 +16,7 @@
 		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 		crossorigin="anonymous">
 
-	<%@ include file="/_header2.jsp"%>
+	<%@ include file="/_header.jsp"%>
 
 	<div class="alert alert-secondary" role="alert">
 		<div class="container">
@@ -25,28 +25,19 @@
 		</div>
 	</div>
 	<div align="center">
-		<div class="card text-center" style="width: 18rem;">
+		<div class="card text-center" style="width: 20rem; height:25rem">
 			<div class="card-body">
-				<h3 class="card-title">유저관리</h3>
+				<h3 class="card-title">유저관리</h3><br><br><br><br>
 				<p class="card-text">유저목록을 불러옵니다. 유저 정보 확인 및 삭제를 할 수 있습니다.</p>
 				<a href="manageuser.jsp" class="btn btn-primary">유저관리페이지</a>
 			</div>
 		</div>
 	</div>
-	<div align="center">
-		<div class="card text-center" style="width: 18rem;">
-			<div class="card-body">
-				<h3 class="card-title">게시판 관리</h3>
-				<p class="card-text">게시판을 관리합니다. 게시글 및 댓들을 삭제 할 수 있습니다.</p>
-				<a href="manageboard.jsp" class="btn btn-primary">게시판 관리 페이지</a>
-			</div>
-		</div>
-	</div>
 
 
 
-	<%@ include file="/_footer2.jsp"%>
-
+	
+<%@ include file="/_footer.jsp"%>
 	<!-- JavaScript Bundle with Popper -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

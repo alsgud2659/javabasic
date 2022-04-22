@@ -3,11 +3,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-/* 	String uid = (String)session.getAttribute("id");
+	String uid = (String)session.getAttribute("id");
 	if(uid == null){
 		response.sendRedirect("/user/login.jsp");
 		return;
-	} // 세션 정보를 확인해서 로그인상태인지 확인한 후 진입 허용 */
+	} // 세션 정보를 확인해서 로그인상태인지 확인한 후 진입 허용 
 
 %>
 <!DOCTYPE html>
@@ -26,7 +26,7 @@
 		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 		crossorigin="anonymous">
 
-	<%@ include file="/_header.jsp"%>
+	<%@ include file="/_header2.jsp"%>
 
 	<div class="alert alert-secondary" role="alert">
 		<div class="container">
@@ -61,7 +61,7 @@
 
 
 
-	<%@ include file="/_footer.jsp"%>
+	<%@ include file="/_footer2.jsp"%>
 
 
 	<!-- JavaScript Bundle with Popper -->

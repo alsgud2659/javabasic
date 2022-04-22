@@ -17,7 +17,7 @@
 		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 		crossorigin="anonymous">
 
-	<%@ include file="/_header2.jsp"%>
+	<%@ include file="/_header.jsp"%>
 	
 	<div class="alert alert-secondary" role="alert">
 		<div class="container">
@@ -46,7 +46,7 @@
 							//JDBC 드라이버 로딩 테스트
 						Class.forName("com.mysql.jdbc.Driver");
 						//DB 연결
-						String url = "jdbc:mysql://localhost:3306/emall";
+						String url = "jdbc:mysql://localhost:3306/ifu";
 						String id = "root";
 						String pw = "0000";
 
@@ -187,7 +187,7 @@
 		<hr>
 	</div>
 	
-	<%@ include file="/_footer2.jsp"%>
+	<%@ include file="/_footer.jsp"%>
 	<!-- JavaScript Bundle with Popper -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
