@@ -1,3 +1,4 @@
+<%@page import="java.time.LocalDate"%>
 <%@page import="java.sql.*"%>
 <%@page import="jdbc.*"%>
 <%@page import="java.util.ArrayList"%>
@@ -27,23 +28,27 @@
 				<%=title%></h1>
 		</div>
 	</div>
-
+	<%
+		BoardDAO dao = new BoardDAO();
+		int todayPost = dao.getTodayPost(LocalDate.now().toString());
+	%>
 
 	<h3 align="center">유저 리스트</h3>
+	<h3 align="right">오늘 자유게시판에 작성된 게시글:<%=todayPost %></h3>
 	<div class="container">
 		<div class="row" align="center">
 			<div class="container my-3" align="center">
+				<form action="multidel.jsp" method="post" id=multidelete>
 				<table class="table">
 					<thead>
 						<tr class="table-dark">
-							<th>번호</th>
+							<th>체크</th>
 							<th>아이디</th>
 							<th>이름</th>
 							<th>성별</th>
 							<th>전화번호</th>
 							<th>가입 날짜</th>
 							<th>유저 삭제</th>
-							<th>정보 수정</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -133,25 +138,23 @@
 						%>
 
 						<tr>
-							<td><%=no%></td>
+							<td><input type="checkbox" name=chk value="<%=uid %>"></td>
 							<td><%=uid%></td>
 							<td><%=uname%></td>
 							<td><%=ugender%></td>
 							<td><%=uphone%></td>
 							<td><%=uregiday%></td>
-							<td><a href="userdeletedb.jsp?uid=<%=uid %>" type="button" class="btn btn-danger">유저삭제</a></td>
-							<td><a href="userupdate.jsp?uid=<%=uid %>&uname=<%=uname %>
-														&ugender=<%=ugender %>&uphone=<%=uphone %>
-														&ubirth=<%=ubirth %>&uaddr=<%=uaddr %>
-														&upw=<%=upw %>&uemail=<%=uemail %>" type="button" class="btn btn-primary">정보수정</a></td>
+							<td><a href="deletecheck.jsp?uid=<%=uid %>" type="button" class="btn btn-danger">유저삭제</a></td>	
 						</tr>
 						<tr>
-							<td colspan=8 align="center">
+							<td colspan=7 align="center">
 							
 								<%
 								no++;
 									}
-					
+								%>
+								<input type="submit" value="유저삭제">
+								<% 
 								//********************************************페이지 제어
 
 								//블럭 번호
@@ -195,10 +198,8 @@
 						</tr>
 					</tbody>
 				</table>
-
-				<a href="manageboard.jsp">게시글 관리</a>
-				<a href="manageboard.jsp">댓글 관리</a>
-
+				</form>
+			
 			</div>
 		</div>
 		<hr>

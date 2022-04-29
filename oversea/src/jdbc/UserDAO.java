@@ -83,32 +83,41 @@ public class UserDAO {
 		
 	}
 	
-	public int update(String uid,String upw, String uname, String ugender, String ubirth, String uemail, String uphone, String uaddr) 
-			throws NamingException, SQLException{
+	
+	
+	public int multiDelete(String[] uids) throws NamingException, SQLException {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
+		int result = 0;
+		int[] cnt = null;
 		
 		try {
-			String sql = "UPDATE user SET upw=?, uname=?, ugender=?, ubirth=?, uemail=?, uphone=?, uaddr=? WHERE uid=?";
+			String sql = "DELETE FROM user WHERE uid=?";
 			conn = ConnectionPool.get();
+			
 			pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, upw);
-				pstmt.setString(2, uname);
-				pstmt.setString(3, ugender);
-				pstmt.setString(4, ubirth);
-				pstmt.setString(5, uemail);
-				pstmt.setString(6, uphone);
-				pstmt.setString(7, uaddr);
-				pstmt.setString(8, uid);
-			int result = pstmt.executeUpdate();
+			for (int i = 0; i < uids.length; i++) {
+				pstmt.setString(1, uids[i]);
+				pstmt.addBatch();
+			}
+			cnt = pstmt.executeBatch();
 			
-			return result;			
+			for (int i = 0; i < cnt.length; i++) {
+				if(cnt[i] == -2) {
+					result++;
+				}
+			}
 			
+			if(uids.length == result) {
+				conn.commit();
+			}else {
+				conn.rollback();
+			}
 		} finally {
+			
 			if(pstmt != null) pstmt.close();
 			if(conn != null) conn.close();
 		}
-		
+		return result;
 	}
-	
 }

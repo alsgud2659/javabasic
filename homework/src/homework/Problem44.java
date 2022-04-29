@@ -17,7 +17,7 @@ public class Problem44 {
 			}
 		}
 		System.out.println(count);			// 만들어지는 아이스크림의 개수를 출력
-
+		
 	}
 	
 	public static boolean dfs(int x, int y) {

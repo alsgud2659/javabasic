@@ -1,3 +1,5 @@
+<%@page import="java.time.LocalDate"%>
+<%@page import="jdbc.BoardDAO"%>
 <%@page import="java.sql.*"%>
 <%@page import="jdbc.ProductDAO"%>
 <%@page import="jdbc.ProductDTO"%>
@@ -28,9 +30,13 @@
 				<%=title%></h1>
 		</div>
 	</div>
-
+<%
+		BoardDAO dao = new BoardDAO();
+		int result = dao.getTodayPost(LocalDate.now().toString());
+	%>
 
 	<h3 align="center">유저 리스트</h3>
+	<h3 align="right">오늘 작성된 게시글:<%=result %></h3>
 	<div class="container">
 		<div class="row" align="center">
 			<div class="container my-3" align="center">

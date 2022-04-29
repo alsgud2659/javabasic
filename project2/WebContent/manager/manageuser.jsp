@@ -1,15 +1,26 @@
+<%@page import="java.time.LocalDate"%>
 <%@page import="java.sql.*"%>
+<%@page import="jdbc.*"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%
+//로그인 여부 확인.
+	String sid = (String) session.getAttribute("uid");
+	if(!session.getAttribute("uid").equals("admin")){
+		response.sendRedirect("/user/login.jsp");
+		return;
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>유저관리</title>
 </head>
 <body>
-<%!// 선언문
-	String title = "게시판 관리";%>
+	<%!// 선언문
+	String title = "유저 관리";%>
 	<!-- CSS only -->
 	<link
 		href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -18,25 +29,39 @@
 		crossorigin="anonymous">
 
 	<%@ include file="/_header.jsp"%>
-	
-	<div class="alert alert-secondary" role="alert">
+
+	<div class="container">
+	<div class="alert alert-info" role="alert">
 		<div class="container">
 			<h1 class="display-3">
-				<%=title%></h1>
+				<%=title%>
+			</h1>
 		</div>
 	</div>
-	<h3 align="center">신고가 들어온 댓글</h3>
+	</div>
+	<%
+		BoardDAO dao = new BoardDAO();
+		int todayPost = dao.getTodayPost(LocalDate.now().toString());
+	%>
+
+	<h3 align="center">유저 리스트</h3>
+	<div style="width:80%;">
+	<h3 align="right">오늘 자유게시판에 작성된 게시글:<%=todayPost %></h3>
+	</div>
 	<div class="container">
 		<div class="row" align="center">
 			<div class="container my-3" align="center">
+				<form action="multidel.jsp" method="post" id=multidelete>
 				<table class="table">
 					<thead>
 						<tr class="table-dark">
-							<th>번호</th>
-							<th>작성자</th>
-							<th>내용</th>
-							<th>작성날짜</th>
-							<th>삭제하기</th>
+							<th>체크</th>
+							<th>아이디</th>
+							<th>이름</th>
+							<th>성별</th>
+							<th>전화번호</th>
+							<th>가입 날짜</th>
+							<th>유저 삭제</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -45,7 +70,7 @@
 							//JDBC 드라이버 로딩 테스트
 						Class.forName("com.mysql.jdbc.Driver");
 						//DB 연결
-						String url = "jdbc:mysql://localhost:3306/emall";
+						String url = "jdbc:mysql://localhost:3306/ifu";
 						String id = "root";
 						String pw = "0000";
 
@@ -56,7 +81,7 @@
 						conn = DriverManager.getConnection(url, id, pw);
 
 						// 테이블 데이터 넣는 SQL
-						String sql = "SELECT count(*) FROM reportcomment";
+						String sql = "SELECT count(*) FROM user";
 						pstmt = conn.prepareStatement(sql);
 						rset = pstmt.executeQuery();
 
@@ -102,7 +127,7 @@
 						//*****************************************************************
 						//SQL 처리
 
-						sql = "SELECT * FROM reportcomment ORDER BY rcname ASC LIMIT ?,?";
+						sql = "SELECT * FROM user ORDER BY uid ASC LIMIT ?,?";
 						pstmt = conn.prepareStatement(sql);
 						pstmt.setInt(1, start_pointer);
 						pstmt.setInt(2, LINE_PER_PAGE);
@@ -113,25 +138,36 @@
 
 						int no = 1;
 						while (rset.next()) {
-							String rcname = rset.getString("rcname");
-							String rccontent = rset.getString("rccontent");
-							String rcdate = rset.getString("rcdate");
+
+							String userid = rset.getString("uid");
+							String uname = rset.getString("uname");
+							String ugender = rset.getString("ugender");
+							String ubirth = rset.getString("ubirth");
+							String uphone = rset.getString("uphone");
+							String uregiday = rset.getString("uregiday");
+							String uaddr = rset.getString("uaddr");
+							String upw = rset.getString("upw");
+							String uemail = rset.getString("uemail");
 						%>
 
 						<tr>
-							<td><%=no%></td>
-							<td><%=rcname%></td>
-							<td><%=rccontent%></td>
-							<td><%=rcdate%></td>
-							<td><a href="#" type="button" class="btn btn-danger">삭제</a></td>
+							<td><input type="checkbox" name=chk value="<%=userid %>"></td>
+							<td><%=userid%></td>
+							<td><%=uname%></td>
+							<td><%=ugender%></td>
+							<td><%=uphone%></td>
+							<td><%=uregiday%></td>
+							<td><a href="deletecheck.jsp?uid=<%=userid %>" type="button" class="btn btn-danger">유저삭제</a></td>	
 						</tr>
 						<tr>
-							<td colspan=6 align="center">
+							<td colspan=7 align="center">
 							
 								<%
 								no++;
 									}
-					
+								%>
+								<input type="submit" value="유저삭제">
+								<% 
 								//********************************************페이지 제어
 
 								//블럭 번호
@@ -175,15 +211,13 @@
 						</tr>
 					</tbody>
 				</table>
-
-				<a href="manageuser.jsp">유저리스트</a>
-				<a href="manageboard.jsp">게시판 관리</a>
-
+				</form>
+			
 			</div>
 		</div>
 		<hr>
 	</div>
-	
+
 	<%@ include file="/_footer.jsp"%>
 	<!-- JavaScript Bundle with Popper -->
 	<script

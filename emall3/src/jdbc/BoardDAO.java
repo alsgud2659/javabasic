@@ -113,5 +113,33 @@ public class BoardDAO {
 		}
 	}
 	
-	
+	public int getTodayPost(String bdate) throws NamingException, SQLException {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		try {
+			String sql = "SELECT * FROM board WHERE bdate=?";
+			conn = ConnectionPool.get();
+			pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, bdate);
+			rs = pstmt.executeQuery();
+			
+			while(!rs.next()) {
+				result++;
+			}
+
+
+
+		} finally {
+			if(rs != null)
+				rs.close();
+			if (pstmt != null)
+				pstmt.close();
+			if (conn != null)
+				conn.close();
+		}
+		
+		return result;
+	}
 }
