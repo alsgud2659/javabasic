@@ -12,7 +12,6 @@ import javax.naming.NamingException;
 import util.ConnectionPool;
 
 public class BoardDAO {
-	
 	public ArrayList<BoardDTO> getList()
 	throws NamingException, SQLException {
 		
